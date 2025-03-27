@@ -1,0 +1,2 @@
+/Users/alzadidyusuf/AndroidStudioProjects/flutter_map_ai/android/app/.cxx/Debug/x564s4d1/armeabi-v7a/CMakeFiles/edit_cache.dir
+/Users/alzadidyusuf/AndroidStudioProjects/flutter_map_ai/android/app/.cxx/Debug/x564s4d1/armeabi-v7a/CMakeFiles/rebuild_cache.dir

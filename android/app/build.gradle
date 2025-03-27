@@ -1,0 +1,49 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader("UTF-8") { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty("flutter.versionCode", "1").toInteger()
+def flutterVersionName = localProperties.getProperty("flutter.versionName", "1.0")
+
+android {
+    namespace = "com.example.sensor_app0"
+    compileSdk = 35 // Specify a specific compileSdkVersion
+    ndkVersion = "25.1.8937393"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8" // Ensure Kotlin is using Java 17
+    }
+
+    defaultConfig {
+        applicationId = "com.example.map_ai_v0"
+        minSdk = 24
+        targetSdk = 35 // Specify a specific targetSdkVersion
+        versionCode = flutterVersionCode
+        versionName = flutterVersionName
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug // Change this for actual release builds
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}

@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/alzadidyusuf/development/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/alzadidyusuf/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/alzadidyusuf/AndroidStudioProjects/flutter_map_ai/android/app/.cxx/Debug/x564s4d1/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/alzadidyusuf/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/alzadidyusuf/AndroidStudioProjects/flutter_map_ai/android/app/.cxx/Debug/x564s4d1/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
