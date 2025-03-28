@@ -4,6 +4,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:provider/provider.dart';
 import '../services/route_service.dart';
+import 'settings_page.dart';
 import '../models/user_preferences.dart';
 import '../services/location_service.dart';
 
@@ -38,7 +39,7 @@ class _MapPageState extends State<MapPage> {
 
       final route = await RouteService.getRoute(_currentLocation!, widget.destination);
       final distance = Distance().as(LengthUnit.Kilometer, _currentLocation!, widget.destination);
-      final duration = (distance / 4.8 * 60).round(); // 4.8km/h walking speed
+      final duration = (distance / 4.8 * 60).round();
 
       setState(() {
         _route = route;
@@ -65,9 +66,7 @@ class _MapPageState extends State<MapPage> {
             ),
             children: [
               TileLayer(
-                urlTemplate: isDark
-                    ? 'https://tiles.stadiamaps.com/tiles/alidade_dark/{z}/{x}/{y}{r}.png'
-                    : 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 subdomains: ['a', 'b', 'c'],
                 retinaMode: true,
               ),
@@ -78,7 +77,7 @@ class _MapPageState extends State<MapPage> {
                       point: _currentLocation!,
                       width: 40,
                       height: 40,
-                      child: Icon(Icons.my_location, color: Colors.blue, size: 40),
+                      child: Icon(Icons.person_pin_circle, color: Colors.red, size: 40),
                     ),
                   Marker(
                     point: widget.destination,
@@ -93,7 +92,7 @@ class _MapPageState extends State<MapPage> {
                   polylines: [
                     Polyline(
                       points: _route,
-                      strokeWidth: 4.5,
+                      strokeWidth: 4.0,
                       color: Colors.blueAccent,
                     ),
                   ],
@@ -105,10 +104,10 @@ class _MapPageState extends State<MapPage> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
-                margin: const EdgeInsets.all(16),
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                margin: EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.95),
+                  color: isDark ? Colors.black87 : Colors.white.withOpacity(0.95),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Row(
@@ -116,12 +115,12 @@ class _MapPageState extends State<MapPage> {
                   children: [
                     Row(children: [
                       Icon(Icons.timer, color: Colors.grey.shade700),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text("$_durationMin min"),
                     ]),
                     Row(children: [
                       Icon(Icons.directions_walk, color: Colors.grey.shade700),
-                      const SizedBox(width: 8),
+                      SizedBox(width: 8),
                       Text("${_distanceKm.toStringAsFixed(1)} km"),
                     ]),
                   ],
@@ -129,13 +128,33 @@ class _MapPageState extends State<MapPage> {
               ),
             ),
 
+          // Locate me
           Positioned(
             bottom: 90,
             right: 16,
             child: FloatingActionButton(
               onPressed: _setupNavigation,
-              backgroundColor: Colors.white,
-              child: Icon(Icons.my_location, color: Colors.black),
+              backgroundColor: isDark ? Colors.grey.shade800 : Colors.white,
+              child: Icon(Icons.my_location, color: isDark ? Colors.white : Colors.black),
+            ),
+          ),
+
+          // Settings icon
+          Positioned(
+            top: 50,
+            right: 20,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/settings');
+              },
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: isDark ? Colors.black.withOpacity(0.7) : Colors.white.withOpacity(0.9),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.settings, color: isDark ? Colors.white : Colors.black),
+              ),
             ),
           ),
         ],
