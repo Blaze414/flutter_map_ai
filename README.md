@@ -22,6 +22,9 @@ A Flutter-based smart navigation app designed for seamless and privacy-friendly 
 - **Interactive UI**  
   Includes a polished search bar with animation, a floating location button, and interactive markers on the map.
 
+- **Dark / Light Map Themes**  
+  Automatically switches between dark and light tile styles based on user preference (via `UserPreferences` model).
+
 ---
 
 ## 📁 Project Structure
@@ -57,9 +60,6 @@ lib/
 ---
 
 ## 🔮 Future Features (Planned)
-
-- **Dark / Light Map Themes**  
-  Automatically switches between dark and light tile styles based on user preference (via `UserPreferences` model).
 
 - 🔎 **Autocomplete Address Suggestions**  
   Integrate with [Photon](https://photon.komoot.io/) or LocationIQ for free suggestion APIs.
